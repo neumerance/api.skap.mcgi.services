@@ -1,5 +1,6 @@
 import http from "http";
 import https from "https";
+import fs from "fs";
 import { Server } from "socket.io";
 import logger from "./utils/logger.js";
 
@@ -9,8 +10,8 @@ let httpServer;
 if (process.env.NODE_ENV === "production") {
   const SSL_PORT = 443;
   const options = {
-    key: fs.readFileSync("./keys/privkey.pem"),
-    cert: fs.readFileSync("./keys/fullchain.pem"),
+    key: fs.readFileSync("privkey.pem"),
+    cert: fs.readFileSync("fullchain.pem"),
   };
 
   httpServer = https.createServer(options, app);
