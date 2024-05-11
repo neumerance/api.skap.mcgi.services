@@ -14,7 +14,7 @@ if (process.env.NODE_ENV === "production") {
     cert: fs.readFileSync("fullchain.pem"),
   };
 
-  httpServer = https.createServer(options, app);
+  httpServer = https.createServer(options);
   httpServer.listen(SSL_PORT, () => {
     console.log(`[INFO] api.skap.mcgi.app is listening on port ${SSL_PORT}`);
   });
