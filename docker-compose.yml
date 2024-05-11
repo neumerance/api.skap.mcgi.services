@@ -36,6 +36,8 @@ services:
       - "443:443"
     volumes:
       - node_modules:/app/node_modules
+      - /etc/letsencrypt/live/api.skap.mcgi.services/privkey.pem:/app/privkey.pem
+      - /etc/letsencrypt/live/api.skap.mcgi.services/fullchain.pem:/app/fullchain.pem
     command: npm run dev
     restart: always
     environment:
