@@ -3,9 +3,17 @@ import https from "https";
 import fs from "fs";
 import { Server } from "socket.io";
 import logger from "./utils/logger.js";
+import express from "express";
 
 const PORT = process.env.PORT || 3000;
+const app = express();
 let httpServer;
+
+app.use(express.json());
+
+app.get("/api/healthz", async (_req, res, _next) => {
+  res.json({ data: "I'm healthy here!" });
+});
 
 const initializeSocketServer = (httpServer) => {
   const io = new Server(httpServer, {
@@ -26,15 +34,15 @@ if (process.env.NODE_ENV === "production") {
     cert: fs.readFileSync("fullchain.pem"),
   };
 
-  httpServer = https.createServer(options);
+  httpServer = https.createServer(options, app);
 
   initializeSocketServer(httpServer);
 
   httpServer.listen(SSL_PORT, () => {
-    console.log(`[INFO] api.skap.mcgi.app is listening on port ${SSL_PORT}`);
+    logger.info(`[INFO] api.skap.mcgi.app is listening on port ${SSL_PORT}`);
   });
 } else {
-  httpServer = http.createServer();
+  httpServer = http.createServer({}, app);
 
   initializeSocketServer(httpServer);
 
