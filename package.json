@@ -1,0 +1,20 @@
+{
+  "name": "api.skap.mcgi.services",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "nodemapp.js",
+  "scripts": {
+    "dev": "nodemon --inspect app.js",
+    "build": "node build",
+    "lint": "npx prettier . --write"
+  },
+  "author": "jonjon",
+  "license": "ISC",
+  "dependencies": {
+    "mongoose": "^8.3.4",
+    "nodemon": "^3.1.0",
+    "socket.io": "^4.7.5",
+    "winston": "^3.13.0"
+  }
+}
