@@ -4,9 +4,7 @@ import logger from "./utils/logger.js";
 
 const PORT = process.env.PORT || 3000;
 const httpServer = createServer();
-const io = new Server(httpServer, {
-
-});
+const io = new Server(httpServer, {});
 
 io.on("connection", (socket) => {
   logger.info("connected");
