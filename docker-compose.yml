@@ -38,7 +38,7 @@ services:
     command: npm run dev
     restart: always
     environment:
-      NODE_ENV: development
+      NODE_ENV: production
     env_file:
       - .env
     depends_on:
