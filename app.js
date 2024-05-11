@@ -18,12 +18,14 @@ app.get("/api/healthz", async (_req, res, _next) => {
 const initializeSocketServer = (httpServer) => {
   const io = new Server(httpServer, {
     cors: {
-      origin: ["*"],
+      origin: ["http://localhost:5173"],
     },
   });
 
   io.on("connection", (socket) => {
-    logger.info("connected");
+    socket.on("BUZZER", (message) => {
+      logger.info("BUZZER ", message);
+    });
   });
 };
 
