@@ -7,6 +7,7 @@ import express from "express";
 import { instrument } from "@socket.io/admin-ui";
 import BuzzerChannel from "./channels/BuzzerChannel.js";
 import GameChannel from "./channels/GameChannel.js";
+import GameSequenceChannel from "./channels/GameSequenceChannel.js";
 
 const PORT = process.env.PORT || 3000;
 const app = express();
@@ -31,6 +32,9 @@ const initializeSocketServer = (httpServer, origin) => {
 
     const buzzerChannel = new BuzzerChannel(socket);
     buzzerChannel.listen();
+
+    const gameSequenceChannel = new GameSequenceChannel(socket);
+    gameSequenceChannel.listen();
   });
 
   instrument(io, { auth: false });
