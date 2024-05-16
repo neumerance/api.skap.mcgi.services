@@ -5,7 +5,7 @@ class GameSequenceChannel extends BaseChannel {
     this.socket.on("new-sequence", (message) => {
       const { gameId } = message;
 
-      this.socket.to(gameId).emit("render-sequence", message);
+      this.socket.to(gameId).emit("render-sequence", { _id: Math.random().toString(36).substring(2), ...message });
     });
   }
 }
