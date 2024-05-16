@@ -4,7 +4,6 @@ import fs from "fs";
 import { Server } from "socket.io";
 import logger from "./utils/logger.js";
 import express from "express";
-import { instrument } from "@socket.io/admin-ui";
 import BuzzerChannel from "./channels/BuzzerChannel.js";
 import GameChannel from "./channels/GameChannel.js";
 import GameSequenceChannel from "./channels/GameSequenceChannel.js";
@@ -36,8 +35,6 @@ const initializeSocketServer = (httpServer, origin) => {
     const gameSequenceChannel = new GameSequenceChannel(socket);
     gameSequenceChannel.listen();
   });
-
-  instrument(io, { auth: false });
 };
 
 if (process.env.NODE_ENV === "production") {
@@ -49,7 +46,6 @@ if (process.env.NODE_ENV === "production") {
 
   const allowedOrigins = [
     "http://localhost:5173",
-    "https://admin.socket.io",
     "https://skap.mcgi.services",
   ];
   httpServer = https.createServer(options, app);
