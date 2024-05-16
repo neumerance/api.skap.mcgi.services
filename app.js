@@ -54,7 +54,7 @@ if (process.env.NODE_ENV === "production") {
   ];
   httpServer = https.createServer(options, app);
 
-  initializeSocketServer(httpServer), allowedOrigins;
+  initializeSocketServer(httpServer, allowedOrigins);
 
   httpServer.listen(SSL_PORT, () => {
     logger.info(`[INFO] api.skap.mcgi.app is listening on port ${SSL_PORT}`);
